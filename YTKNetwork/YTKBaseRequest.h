@@ -224,6 +224,14 @@ typedef void(^YTKRequestCompletionBlock)(__kindof YTKBaseRequest *request);
 ///  The priority of the request. Effective only on iOS 8+. Default is `YTKRequestPriorityDefault`.
 @property (nonatomic) YTKRequestPriority requestPriority;
 
+///  Use this to build custom request. If this method return non-nil value, `requestUrl`, `requestTimeoutInterval`,
+///  `requestArgument`, `allowsCellularAccess`, `requestMethod` and `requestSerializerType` will all be ignored.
+@property (nonatomic, strong) NSURLRequest *buildCustomUrlRequest;
+
+///  Response serializer type. See also `responseObject`.
+@property (nonatomic) YTKResponseSerializerType responseSerializerType;
+
+
 ///  Set completion callbacks
 - (void)setCompletionBlockWithSuccess:(nullable YTKRequestCompletionBlock)success
                               failure:(nullable YTKRequestCompletionBlock)failure;
@@ -307,18 +315,11 @@ typedef void(^YTKRequestCompletionBlock)(__kindof YTKBaseRequest *request);
 ///  Request serializer type.
 - (YTKRequestSerializerType)requestSerializerType;
 
-///  Response serializer type. See also `responseObject`.
-- (YTKResponseSerializerType)responseSerializerType;
-
 ///  Username and password used for HTTP authorization. Should be formed as @[@"Username", @"Password"].
 - (nullable NSArray<NSString *> *)requestAuthorizationHeaderFieldArray;
 
 ///  Additional HTTP request header field.
 - (nullable NSDictionary<NSString *, NSString *> *)requestHeaderFieldValueDictionary;
-
-///  Use this to build custom request. If this method return non-nil value, `requestUrl`, `requestTimeoutInterval`,
-///  `requestArgument`, `allowsCellularAccess`, `requestMethod` and `requestSerializerType` will all be ignored.
-- (nullable NSURLRequest *)buildCustomUrlRequest;
 
 ///  Should use CDN when sending request.
 - (BOOL)useCDN;

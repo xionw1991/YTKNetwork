@@ -79,9 +79,13 @@
 
 - (AFJSONResponseSerializer *)jsonResponseSerializer {
     if (!_jsonResponseSerializer) {
-        _jsonResponseSerializer = [AFJSONResponseSerializer serializer];
+        AFJSONResponseSerializer *serializer = [AFJSONResponseSerializer serializer];
+        NSMutableSet *set = [NSMutableSet setWithSet:serializer.acceptableContentTypes];
+        [set addObjectsFromArray:@[@"application/javascript", @"text/html"]];
+        serializer.acceptableContentTypes = set;
+        _jsonResponseSerializer = serializer;
         _jsonResponseSerializer.acceptableStatusCodes = _allStatusCodes;
-
+        
     }
     return _jsonResponseSerializer;
 }

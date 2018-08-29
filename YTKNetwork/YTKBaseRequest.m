@@ -46,6 +46,17 @@ NSString *const YTKRequestValidationErrorDomain = @"com.yuantiku.request.validat
 
 @implementation YTKBaseRequest
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.responseSerializerType = YTKResponseSerializerTypeJSON;
+    }
+    return self;
+}
+
+
+
 #pragma mark - Request and Response Information
 
 - (NSHTTPURLResponse *)response {
@@ -169,19 +180,11 @@ NSString *const YTKRequestValidationErrorDomain = @"com.yuantiku.request.validat
     return YTKRequestSerializerTypeHTTP;
 }
 
-- (YTKResponseSerializerType)responseSerializerType {
-    return YTKResponseSerializerTypeJSON;
-}
-
 - (NSArray *)requestAuthorizationHeaderFieldArray {
     return nil;
 }
 
 - (NSDictionary *)requestHeaderFieldValueDictionary {
-    return nil;
-}
-
-- (NSURLRequest *)buildCustomUrlRequest {
     return nil;
 }
 
